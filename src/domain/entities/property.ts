@@ -1,5 +1,6 @@
 import { DateRange } from "../value_objects/date_range";
 import { Booking } from "./booking";
+
 export class Property {
   private readonly id: String;
   private readonly name: String;
@@ -66,6 +67,10 @@ export class Property {
 
   getName(): String {
     return this.name;
+  }
+
+  getDescription(): String {
+    return this.description;
   }
 
   getMaxGuests(): Number {
