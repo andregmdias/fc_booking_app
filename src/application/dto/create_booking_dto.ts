@@ -1,6 +1,6 @@
 export interface CreateBookingDto {
   propertyId: string;
-  gestId: string;
+  guestId: string;
   startDate: Date;
   endDate: Date;
   guestCount: number;

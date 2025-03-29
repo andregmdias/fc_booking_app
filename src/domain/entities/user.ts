@@ -1,8 +1,8 @@
 export class User {
-  private readonly id: String;
-  private readonly name: String;
+  private readonly id: string;
+  private readonly name: string;
 
-  constructor(id: String, name: String) {
+  constructor(id: string, name: string) {
     if (!name) {
       throw new Error("O nome é obrigatório");
     }
@@ -15,11 +15,11 @@ export class User {
     this.name = name;
   }
 
-  getId(): String {
+  getId(): string {
     return this.id;
   }
 
-  getName(): String {
+  getName(): string {
     return this.name;
   }
 }
