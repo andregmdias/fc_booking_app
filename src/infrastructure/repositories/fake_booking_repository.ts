@@ -8,8 +8,7 @@ export class FakeBookingRepository implements BookingRepository {
     return this.bookings.find((user) => user.getId() === id) || null;
   }
 
-  async save(booking: Booking): Promise<Booking> {
+  async save(booking: Booking): Promise<void> {
     this.bookings.push(booking);
-    return booking;
   }
 }

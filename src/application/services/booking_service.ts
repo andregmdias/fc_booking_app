@@ -34,7 +34,8 @@ export class BookingService {
             dateRange,
             dto.guestCount
         );
-        return this.bookingRepository.save(booking);
+        await this.bookingRepository.save(booking);
+        return booking;
     }
 
     async cancelBooking(id: string): Promise<void> {

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import {Column, Entity, OneToMany, PrimaryColumn} from "typeorm";
+import {BookingEntity} from "./booking_entity";
+import {Booking} from "../../../domain/entities/booking";
 
 @Entity("properties")
 export class PropertyEntity {
@@ -31,8 +33,8 @@ export class PropertyEntity {
   @Column({ name: "base_price_per_night", type: "decimal" })
   basePricePerNight!: number;
 
-  // @Column()
-  // bookings: Booking[] = [];
+  @OneToMany(() => BookingEntity, (booking) => booking.property)
+  bookings!: BookingEntity[];
 
   getId(): string {
     return this.id;
