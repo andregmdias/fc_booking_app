@@ -2,9 +2,9 @@ import { DateRange } from "../value_objects/date_range";
 import { Booking } from "./booking";
 
 export class Property {
-  private readonly id: String;
-  private readonly name: String;
-  private readonly description: String;
+  private readonly id: string;
+  private readonly name: string;
+  private readonly description: string;
   private readonly maxGuests: number;
   private readonly basePricePerNight: number;
   private readonly bookings: Booking[] = [];
@@ -61,23 +61,23 @@ export class Property {
     this.bookings.push(booking);
   }
 
-  getId(): String {
+  getId(): string {
     return this.id;
   }
 
-  getName(): String {
+  getName(): string {
     return this.name;
   }
 
-  getDescription(): String {
+  getDescription(): string {
     return this.description;
   }
 
-  getMaxGuests(): Number {
+  getMaxGuests(): number {
     return this.maxGuests;
   }
 
-  getBasePricePerNight(): Number {
+  getBasePricePerNight(): number {
     return this.basePricePerNight;
   }
 
