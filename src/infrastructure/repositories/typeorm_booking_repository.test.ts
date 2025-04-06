@@ -82,7 +82,57 @@ describe("TypeORMBookingRepository", () => {
     expect(fetchBooking).not.toBeNull();
     expect(fetchBooking?.getId()).toEqual("1");
     expect(fetchBooking?.getProperty().getId()).toEqual("1");
-    expect(fetchBooking?.getNumberOfGuests()).toEqual(6);
-    expect(fetchBooking?.getUser().getId()).toEqual("1");
+    expect(fetchBooking?.getGuestCount()).toEqual(6);
+    expect(fetchBooking?.getGuest().getId()).toEqual("1");
+  });
+
+  it("deve retornar null ao buscar uma reserva inexistente", async () => {
+    const savedBooking = await bookingRepository.findById("2");
+    expect(savedBooking).toBeNull();
+  });
+
+  it("deve salvar uma reserva com sucesso - fazendo cancelamento posterior", async () => {
+    const propertyRepository = dataSource.getRepository(PropertyEntity);
+    const userRepository = dataSource.getRepository(UserEntity);
+
+    const propertyEntity = propertyRepository.create({
+      id: "1",
+      name: "Casa na Praia",
+      description: "Vista para o mar",
+      maxGuests: 6,
+      basePricePerNight: 200,
+    });
+    await propertyRepository.save(propertyEntity);
+
+    const property = new Property(
+        "1",
+        "Casa na Praia",
+        "Vista para o mar",
+        6,
+        200
+    );
+
+    const userEntity = userRepository.create({
+      id: "1",
+      name: "Carlos",
+    });
+    await userRepository.save(userEntity);
+
+    const user = new User("1", "Carlos");
+    const dateRange = new DateRange(
+        new Date("2024-12-20"),
+        new Date("2024-12-25")
+    );
+
+    const booking = new Booking("1", property, user, dateRange, 4);
+    await bookingRepository.save(booking);
+
+    booking.cancel(new Date("2024-12-15"));
+    await bookingRepository.save(booking);
+
+    const updatedBooking = await bookingRepository.findById("1");
+
+    expect(updatedBooking).not.toBeNull();
+    expect(updatedBooking?.getStatus()).toBe("CANCELLED");
   });
 });

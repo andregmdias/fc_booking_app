@@ -16,7 +16,7 @@ export class BookingService {
         const property = await this.propertyService.findById(dto.propertyId);
 
         if(!property) {
-            throw new Error("Propriedade não encontrada");
+            throw new Error("Propriedade não encontrada.");
         }
 
         const user = await this.userService.findUserById(dto.guestId)

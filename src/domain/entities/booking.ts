@@ -6,7 +6,7 @@ import { User } from "./user";
 export class Booking {
   private readonly id: string;
   private readonly property: Property;
-  private readonly user: User;
+  private readonly guest: User;
   private readonly dateRange: DateRange;
   private readonly numberOfGuests: number;
   private status: "CONFIRMED" | "CANCELLED" = "CONFIRMED";
@@ -15,14 +15,14 @@ export class Booking {
   constructor(
     id: string,
     property: Property,
-    user: User,
+    guest: User,
     dateRange: DateRange,
-    numberOfGuests: number,
+    guestCount: number,
   ) {
-    if (numberOfGuests <= 0) {
+    if (guestCount <= 0) {
       throw new Error("O número de hóspedes deve ser maior que zero.");
     }
-    property.validateGuestCount(numberOfGuests);
+    property.validateGuestCount(guestCount);
 
     if (!property.isAvailable(dateRange)) {
       throw new Error(
@@ -32,9 +32,9 @@ export class Booking {
 
     this.id = id;
     this.property = property;
-    this.user = user;
+    this.guest = guest;
     this.dateRange = dateRange;
-    this.numberOfGuests = numberOfGuests;
+    this.numberOfGuests = guestCount;
     this.totalPrice = property.calculateTotalPrice(dateRange);
     this.status = "CONFIRMED";
 
@@ -66,15 +66,15 @@ export class Booking {
     return this.property;
   }
 
-  getUser(): User {
-    return this.user;
+  getGuest(): User {
+    return this.guest;
   }
 
   getDateRange(): DateRange {
     return this.dateRange;
   }
 
-  getNumberOfGuests(): number {
+  getGuestCount(): number {
     return this.numberOfGuests;
   }
 

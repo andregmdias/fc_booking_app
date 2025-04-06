@@ -90,7 +90,7 @@ describe("BookingService", () => {
     };
 
     await expect(bookingService.createBooking(bookingDto)).rejects.toThrow(
-        "Propriedade não encontrada"
+        "Propriedade não encontrada."
     );
   });
 

@@ -31,10 +31,10 @@ export class BookingMapper {
         const entity = new BookingEntity();
         entity.id = model.getId();
         entity.property = PropertyMapper.fromModel(model.getProperty());
-        entity.user = UserMapper.fromModel(model.getUser());
+        entity.user = UserMapper.fromModel(model.getGuest());
         entity.startDate = model.getDateRange().getStartDate();
         entity.endDate = model.getDateRange().getEndDate();
-        entity.numberOfGuests = model.getNumberOfGuests();
+        entity.numberOfGuests = model.getGuestCount();
         entity.status = model.getStatus();
         entity["totalPrice"] = model.getTotalPrice();
 
